@@ -111,6 +111,8 @@ class SemanticsTester {
     Float64List? transform,
     Int32List? additionalActions,
     List<SemanticsNodeUpdate>? children,
+    int? headingLevel,
+    String? linkUrl,
   }) {
     // Flags
     if (hasCheckedState ?? false) {
@@ -311,6 +313,8 @@ class SemanticsTester {
       childrenInTraversalOrder: childIds,
       childrenInHitTestOrder: childIds,
       additionalActions: additionalActions ?? Int32List(0),
+      headingLevel: headingLevel ?? 0,
+      linkUrl: linkUrl,
     );
     _nodeUpdates.add(update);
     return update;
@@ -343,7 +347,7 @@ class SemanticsTester {
 /// Verifies the HTML structure of the current semantics tree.
 void expectSemanticsTree(EngineSemanticsOwner owner, String semanticsHtml) {
   expect(
-    owner.semanticsHost.querySelector('flt-semantics'),
+    owner.semanticsHost.children.single,
     hasHtml(semanticsHtml),
   );
 }
